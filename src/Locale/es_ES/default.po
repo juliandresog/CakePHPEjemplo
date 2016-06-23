@@ -1,0 +1,11 @@
+msgid "My name is {0}"
+msgstr "Mi nombre es {0}"
+
+msgid "I'm {0,number} years old"
+msgstr "Yo tengo {0,number} años"
+
+msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}"
+msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{# resultados}}"
+
+msgid "{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}
+msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
