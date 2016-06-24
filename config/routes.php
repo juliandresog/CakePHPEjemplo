@@ -51,9 +51,9 @@ Router::scope(
 }
 );
 
-Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
+/*Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
     $routes->connect('/', ['controller' => 'Articles']);
-});
+});*/
 
 //RESTFul
 Router::scope('/api', function ($routes) {
@@ -84,7 +84,8 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    //$routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/', ['controller' => 'Pages', 'action' => 'indexExt']);
     //$routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
     /**
@@ -92,6 +93,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
+    //ajuste redirect para view de articulos
     Router::connect(
             '/articles/:id', ['controller' => 'Articles', 'action' => 'view'], ['id' => '\d+', 'pass' => ['id']]
     );

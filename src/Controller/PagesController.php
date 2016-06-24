@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
+use Cake\Log\Log;
 
 /**
  * Static content controller
@@ -28,6 +29,13 @@ use Cake\View\Exception\MissingTemplateException;
 class PagesController extends AppController
 {
 
+    /**
+     * Mostrar indice de ext
+     */
+    public function indexExt(){
+        Log::alert("Mostrando el inicio");
+    }
+    
     /**
      * Displays a view
      *

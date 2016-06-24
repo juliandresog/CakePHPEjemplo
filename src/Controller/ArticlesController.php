@@ -152,8 +152,6 @@ class ArticlesController extends AppController {
         $this->set('article', $article);
     }
 
-    
-
     /**
      * Edit
      * @param type $id
@@ -192,33 +190,29 @@ class ArticlesController extends AppController {
      * @return boolean
      */
     public function isAuthorized($user) {
-        return true;
-
-        /*
-          // All registered users can add articles
-          if ($this->request->action === 'add') {
-          return true;
-          }
-          // The owner of an article can edit and delete it
-          if (in_array($this->request->action, ['edit', 'delete'])) {
-          $articleId = (int) $this->request->params['pass'][0];
-          if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
-          return true;
-          }
-          }
-          return parent::isAuthorized($user);
-
-         */
+        //return true;
+        // All registered users can add articles
+        if ($this->request->action === 'add') {
+            return true;
+        }
+        // The owner of an article can edit and delete it
+        if (in_array($this->request->action, ['edit', 'delete'])) {
+            $articleId = (int) $this->request->params['pass'][0];
+            if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
     }
-    
+
     /**
      * 
      */
     public function add2() {
         try {
             Log::warning("===============================================================");
-            $article = $this->Articles->nuevoArticulo();
-            
+            $article = $this->Articles->demosORMSQLFunctions();
+
             Log::warning("===============================================================");
             //demo funcional
             /* Log::info("Entra a enviar un correo");
@@ -254,7 +248,7 @@ class ArticlesController extends AppController {
             foreach ($files as $file) {
                 $file = new File($dir->pwd() . DS . $file);
                 $contents = $file->read();
-                Log::alert("Contenido file: ".$contents);
+                Log::alert("Contenido file: " . $contents);
                 // $file->write('I am overwriting the contents of this file');
                 // $file->append('I am adding to the bottom of this file.');
                 // $file->delete(); // I am deleting this file
@@ -263,11 +257,11 @@ class ArticlesController extends AppController {
             //time
             // Returns '2014-04-12 12:22:30'
             $now = Time::now();
-            Log::alert("Ahora: ".$now);
+            Log::alert("Ahora: " . $now);
             //$now = Time::parse('2014-10-31');
             // Outputs 'Oct 31, 2014 12:00 AM' in en-US
             //echo $now->nice();
-            Log::alert("Ahora nice: ".$now->nice());
+            Log::alert("Ahora nice: " . $now->nice());
         } catch (Exception $e) {
             Log::error("Resultado: " . $e->getMessage());
         }

@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Utility\Inflector;
 
 /**
  * Article Entity.
@@ -12,8 +14,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  */
-class Article extends Entity
-{
+class Article extends Entity {
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -28,4 +29,14 @@ class Article extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    protected function _getTitle($title) {
+        return ucwords($title);
+    }
+
+    protected function _setTitle($title) {
+        $this->set('slug', Inflector::slug($title));
+        return $title;
+    }
+
 }

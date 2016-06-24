@@ -116,6 +116,9 @@ class UsersController extends AppController {
         }
     }
 
+    /**
+     * Permitiendo cosas sin login
+     */
     public function initialize() {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);

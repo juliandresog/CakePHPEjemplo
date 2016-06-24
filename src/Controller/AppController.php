@@ -18,6 +18,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Log\Log;
 
 /**
  * Application Controller
@@ -39,14 +40,15 @@ class AppController extends Controller {
      * @return void
      */
     public function initialize() {
-        /* parent::initialize();
+        parent::initialize();
 
-          $this->loadComponent('RequestHandler');
+        /*  $this->loadComponent('RequestHandler');
           $this->loadComponent('Flash'); */
 
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'authorize' => 'Controller', //added this line
+            'authError' => 'Did you really think you are allowed to see that?',
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -62,17 +64,6 @@ class AppController extends Controller {
             'unauthorizedRedirect' => $this->referer()
         ]);
 
-        /* $this->loadComponent('Auth', [
-          'loginRedirect' => [
-          'controller' => 'Articles',
-          'action' => 'index'
-          ],
-          'logoutRedirect' => [
-          'controller' => 'Pages',
-          'action' => 'display',
-          'home'
-          ]
-          ]); */
 
         // Allow the display action so our pages controller
         // continues to work.
@@ -94,14 +85,21 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(Event $event) {
-        $this->Auth->allow(['index', 'view', 'display']);
+        $this->Auth->allow(['index', 'view', 'display', 'indexExt']);
     }
 
+    /**
+     * Para validar authorized
+     * @param type $user
+     * @return boolean
+     */
     public function isAuthorized($user) {
         // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
+            Log::alert("app: permiso true");
             return true;
         }
+        Log::alert("app: permiso false");
         // Default deny
         return false;
     }
