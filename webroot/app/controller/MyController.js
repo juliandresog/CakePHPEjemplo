@@ -23,25 +23,25 @@ Ext.define('MyApp.controller.MyController', {
     },
 
     onMytableRowClick: function(tableview, record, tr, rowIndex, e, eOpts) {
-                //Ext.Msg.alert('Info', 'Click en '+record.id);
-                //Ext.getCmp('myform').loadRecord(record);
+        //Ext.Msg.alert('Info', 'Click en '+record.id);
+        //Ext.getCmp('myform').loadRecord(record); no funciona en cotroller?
 
-                //peticion ajax para verificar datos
-                Ext.Ajax.request({
-                   url:'api/recipes/'+record.id+'.json',
-                   success: function(response){
-                      var result = Ext.decode(response.responseText);
-                      var value=result.recipe;
-                      //getValue(value);
-                     Ext.Msg.alert('Info', 'Click en '+value.name);
+        //peticion ajax para verificar datos
+        Ext.Ajax.request({
+            url:'api/recipes/'+record.id+'.json',
+            success: function(response){
+                var result = Ext.decode(response.responseText);
+                var value=result.recipe;
+                //getValue(value);
+                Ext.Msg.alert('Info', 'Click en '+value.name);
 
-                     //Ext.getCmp('myform').getForm().setValues({
-                     //   name: value.name,
-                     //   id: value.id
-                     //});
-                     //var name = Ext.getCmp('name').setValue(value.name);
-                   }
-                });
+                //Ext.getCmp('myform').getForm().setValues({
+                //   name: value.name,
+                //   id: value.id
+                //});
+                //var name = Ext.getCmp('name').setValue(value.name);
+            }
+        });
     }
 
 });
